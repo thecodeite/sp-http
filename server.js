@@ -6,6 +6,17 @@ var app = express();
 
 var root = process.cwd();
 
+if(process.env.FOLDER) {
+  var folder = process.env.FOLDER;
+  if(folder[0] === '/') {
+    root = folder;
+  } else {
+    root = path.join(root, folder);
+  }
+}
+
+console.log('Using root:', root);
+
 app.use(function(req, res, next) {
   console.log(req.method+':', req.path);
   next();
